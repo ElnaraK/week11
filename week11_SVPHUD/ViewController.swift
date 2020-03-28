@@ -19,19 +19,26 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
     
         super.viewDidAppear(animated)
-        SVProgressHUD.setBackgroundLayerColor(UIColor.yellow)
+        
         SVProgressHUD.show()
+        view.backgroundColor = UIColor.yellow
         DispatchQueue.global(qos: .background).async {
             self.download()
+            self.bigTask()
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
             }
         }
     }
     
+    func bigTask() {
+        for i in 0...1000000 {
+            print(i)
+        }
+    }
     
     func download() {
-        guard let url = URL(string: "https://gorest.co.in/public-api/users?_format=json&access-token=Aait18PXVCKmnRNO83zrQVlYgIgClqsENPqC") else
+        guard let url = URL(string: "https://gorest.co.in/public-api/users?_format=json&access-token=4vzWPKrz6cvdFkQ-_33ce_XUFnmmKmUrnuNd") else
         { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
